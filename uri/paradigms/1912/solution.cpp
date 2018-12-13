@@ -1,14 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print_vec(vector<double> &v){
-    for(auto &i: v)cout<<i<<" ";
-    cout<<endl;
-}
-
 double f_binary_search(vector<double>& strips, int a,double imax,double imin){
     double h = imin +((imax - imin)/2),area=0.0000;
-    if(imax < imin){return h;}
+    if(imax < imin)return h;
     for(auto &i :strips){
         if(h < i) area+= i-h;
     }

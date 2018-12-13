@@ -3,9 +3,9 @@ using namespace std;
 
 
 int main(){
-	
+
 	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+  	cin.tie(NULL);
 	int n,ob;
 	cin>>n;
 	vector<int> v1(n+1,0),v2(n+1,0);

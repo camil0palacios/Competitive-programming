@@ -27,19 +27,18 @@ std::string reverseParentheses(std::string s) {
 	            if(s[j] == '('){
 	                s[j] = ')';
 	                cont++;
-	            }
-				else if(s[j] == ')'){
-					cont--;
-					if(cont == 0){
-						break;
-					}else s[j] = '(';
-	            }
+              }
+        			else if(s[j] == ')'){
+        				cont--;
+        				if(cont == 0)break;
+        				else s[j] = '(';
+              }
 	        }
 	        s = reverse(s,i+1,fin-1);
 	        s.erase(s.begin()+i);
 	        s.erase(s.begin()+fin-1);
-		}
-		else i++;
+		   }
+		   else i++;
     }
     return s;
 }

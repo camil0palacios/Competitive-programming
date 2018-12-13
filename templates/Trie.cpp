@@ -13,7 +13,7 @@ void Add(Node* node, string& cad, int id){
   node->counter++;
   if(id == cad.size()){node->isTerm=true; return;}
   if(node->edges.count(cad[id])==0)
-    node->edges[cad[id]]=new Node();
+  node->edges[cad[id]]=new Node();
   Add(node->edges[cad[id]], cad, id+1);;
 
 }
