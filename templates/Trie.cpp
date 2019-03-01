@@ -17,16 +17,6 @@ void Add(Node* node, string& cad, int id){
   Add(node->edges[cad[id]], cad, id+1);;
 
 }
-/*
-Node* Add(Node* node, string& cad, int id){
-  if(Node* node==nulptr) node == new Node();
-  Node*  next = nullptr;
-  if(id==cad.size())
-    return node;
-  if(node->edges.count(cad[id])) next = node->edges[cad[id]];
-  node->edges[cad[id]] = Add(next, cad, id+1);
-  return node;
-}*/
 
 bool result(Node* node){
   if(node->isTerm && node->counter != 1) return false;

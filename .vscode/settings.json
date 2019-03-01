@@ -6,6 +6,9 @@
         "deque": "cpp",
         "vector": "cpp",
         "cmath": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "ostream": "cpp",
+        "iomanip": "cpp",
+        "cstdlib": "cpp"
     }
 }

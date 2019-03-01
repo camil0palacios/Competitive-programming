@@ -2,18 +2,19 @@
 using namespace std;
 
 int main(){
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
     int n;
-    vector<string> a;
-    string aux;
-    cin>>n;
-    for(int i=0; i < n ; i++){
-        cin>>aux;
-        a.push_back(aux);
-    }
-    for(int i=0; i < a.size(); i++){
-        if(a[i].size() > 10){
-            cout<<a[i][0]<<a[i].size()-2<<a[i][a[i].size()-1]<<"\n";
-        }else cout<<a[i]<<"\n";
+    while(cin >> n){
+        for(int i = 0; i < n; i++){
+            string s;
+            cin >> s;
+            if(s.size() > 10){
+                int x = s.size(), ab = 0;
+                cout << s[0];
+                for(int j = 1; j < x - 1; j++)ab++;
+                cout << ab << s[x-1] << endl;
+            }else cout << s << endl;
+        }
     }
     return 0;
 }
