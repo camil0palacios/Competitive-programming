@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+
+int main(){
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+    long long n, k;
+    cin >> n >> k;
+    long long mid = (n + 1) / 2;
+    cout << (k <= mid ? 2*k - 1 : (k - mid)*2) << endl;
+    return 0;
+}
