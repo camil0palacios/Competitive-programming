@@ -9,6 +9,19 @@
         "bitset": "cpp",
         "ostream": "cpp",
         "iomanip": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "new": "cpp",
+        "tuple": "cpp",
+        "array": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "initializer_list": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp",
+        "ratio": "cpp",
+        "random": "cpp"
     }
 }
