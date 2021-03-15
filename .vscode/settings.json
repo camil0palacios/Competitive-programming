@@ -22,6 +22,9 @@
         "regex": "cpp",
         "valarray": "cpp",
         "ratio": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "string_view": "cpp",
+        "functional": "cpp",
+        "complex": "cpp"
     }
 }

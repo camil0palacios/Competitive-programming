@@ -1,2 +1,5 @@
-uri/graph/1469/
 .vscode/
+*.exe
+*.in
+*.out
+*.txt

@@ -4,10 +4,12 @@ struct Dinic {
         ll flow = 0, cap;
         Edge(int u, int v, int cap): u(u), v(v), cap(cap) {}
     };
+    int n, m = 0;
+    int s, t;
     vector<Edge> edges; 
     vector<vector<int>> adj;
     vector<int> lvl, ptr;
-    Dinic(int n) {
+    Dinic(int n, int s, int t): n(n), s(s), t(t) {
         adj.resize(n);
         lvl.resize(n);
         ptr.resize(n);
@@ -15,8 +17,9 @@ struct Dinic {
     void add_edge(int u, int v, ll cap) {
         edges.emplace_back(u, v, cap);
         edges.emplace_back(v, u, 0);
-        adj[u].emplace_back(edges.size() - 2);
-        adj[v].emplace_back(edges.size() - 1);
+        adj[u].emplace_back(m);
+        adj[v].emplace_back(m + 1);
+        m += 2;
     }
     bool bfs(int s, int t) {
         queue<int> q;
@@ -50,7 +53,7 @@ struct Dinic {
         }
         return 0;
     }
-    ll flow(int s, int t) {
+    ll flow() {
         ll f = 0;
         while(true) {
             fill(lvl.begin(), lvl.end(), -1);

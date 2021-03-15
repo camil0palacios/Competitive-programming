@@ -29,7 +29,7 @@ int findR(int x){
     int l = 0, r = n;
     while(r - l > 1){
         int mid = (l + r) >> 1;
-        if(a[mid] <= x)l = mid;
+        if(a[mid] <= x) l = mid;
         else r = mid;    
     }
     return l;
@@ -46,7 +46,7 @@ int findL(){
     int l = -1, r = R;
     while(r - l > 1){
         int mid = (l + r) >> 1;
-        if(query(mid))r = mid;
+        if(query(mid)) r = mid;
         else l = mid;
     }
     return r + 1;

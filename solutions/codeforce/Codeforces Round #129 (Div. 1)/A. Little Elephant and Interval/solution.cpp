@@ -1,27 +1,48 @@
 #include <bits/stdc++.h>
+#define endl '\n'
+#define ll long long
+#define fori(i,a,b) for(int i = a; i < b; i++)
+#define forr(i,a,b) for(int i = a; i >= b; i--)
+#define fore(i,a,b) for(int i = a; i <= b; i++)
+#define ft first
+#define sd second
+#define all(v) v.begin(), v.end()
+#define sz(v) (int) v.size()
+#define pb push_back
+#define eb emplace_back
 using namespace std;
 
-long long dp[19][2][2][10][10];
+typedef pair<int,int> ii;
+typedef vector<int> vi;
+typedef vector<bool> vb;
+typedef vector<ii> vii;
+typedef vector<ll> vl;
 
-long long dptop(string & s, int idx, bool top, bool take, int first, int last){
-    if(idx == s.size())return first == last;
-    if(dp[idx][top][take][first][last] != -1)return dp[idx][top][take][first][last];
-    int mmax = (top ? s[idx]-'0' : 9);
-    long long ans = 0;
-    for(int i = 0; i <= mmax; i++){
-        ans += dptop(s,idx+1,top && (i == mmax),take || (i != 0),(!take && i != 0 ? i : first), i);
+ll dp[19][2][2][11][11];
+string s;
+
+ll go(int idx, bool top, bool z, int x, int y) {
+    if(idx == sz(s)) return x == y;
+    ll & ans = dp[idx][top][z][x][y];
+    if(ans == -1) {
+        ans = 0;
+        int mx = top ? s[idx]-'0' : 9;
+        fore(i,0,mx) {
+            ans += go(idx+1, top && i == mx, z || i > 0, x ? x : i > 0 ? i : 0, i);
+        }
     }
-    return dp[idx][top][take][first][last] = ans;
+    return ans;
 }
 
-int main(){
-    long long x;
-    string a,b;
-    cin >> x >> b;
-    a = to_string(x-1);
+int main() { 
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+    ll l, r;
+    cin >> l >> r;
+    s = to_string(l-1);
     memset(dp, -1, sizeof dp);
-    x = dptop(a,0,1,0,0,0);
+    ll ans = go(0,1,0,0,0);
+    s = to_string(r);
     memset(dp, -1, sizeof dp);
-    cout << dptop(b,0,1,0,0,0) - x << endl;
-    return 0;
+    cout << go(0,1,0,0,0) - ans << endl;
+    return 0; 
 }
