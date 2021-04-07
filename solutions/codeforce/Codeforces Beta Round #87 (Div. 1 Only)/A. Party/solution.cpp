@@ -20,32 +20,32 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int Mxn = 2020;
+bool vis[Mxn];
+vi g[Mxn];
+set<int> s;
+
+void dfs(int u, int p = 0, int d = 0) {
+    vis[u] = 1;
+    s.insert(d);
+    for(auto & v : g[u]) {
+        if(v == p) continue;
+        dfs(v, u, d+1);
+    }
+}
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
+    int n;
+    cin >> n;
+    fore(i,1,n) {
+        int u; cin >> u;
+        if(u == -1) continue;
+        g[u].eb(i);
     }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
-        }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
+    fore(i,1,n) {
+        if(!vis[i]) dfs(i);
     }
-    cout << ans << endl;
+    cout << sz(s) << endl;
     return 0; 
 }

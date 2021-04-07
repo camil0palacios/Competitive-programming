@@ -20,32 +20,25 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int lim = 1e6 + 5;
+
+int lcm(int a, int b) { return a*b/__gcd(a, b); }
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, k;
+        cin >> n >> k;
+        if(n & 1) {
+            int x = (n-1) / 2;
+            cout << 1 << ' ' << x << ' ' << x << endl;
+        } else {
+            int x = n/2;
+            if(x & 1) cout << 2 << ' ' << x-1 << ' ' << x-1 << endl;
+            else cout << x << ' ' << x/2 << ' ' << x/2 << endl;
         }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
     }
-    cout << ans << endl;
     return 0; 
 }

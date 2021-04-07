@@ -20,32 +20,25 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int Mxn = 2e5 + 5;
+int h[Mxn], l[Mxn], r[Mxn];
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, k;
+        cin >> n >> k;
+        fori(i,0,n) cin >> h[i], r[i] = l[i] = 0;
+        l[0] = r[0] = h[0];
+        bool ok = 1;
+        fori(i,1,n) {
+            l[i] = max(l[i-1] - k + 1, h[i]);
+            r[i] = min(r[i-1] + k - 1, h[i] + k - 1);
+            if(l[i] > r[i]) ok = 0;
         }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
+        cout << (ok && l[n-1] == h[n-1] ? "yes" : "no") << endl;
     }
-    cout << ans << endl;
     return 0; 
 }

@@ -20,31 +20,21 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int Mxn = 1e5 + 5;
+int a[Mxn];
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
+    int n;
+    cin >> n;
+    fori(i,0,n) cin >> a[i];
+    map<int,int> m;
+    int l = 0;
     ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
-        }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
+    fori(i,0,n) {
+        if(m.count(a[i])) l = max(m[a[i]]+1, l);
+        ans += i - l + 1;
+        m[a[i]] = i;
     }
     cout << ans << endl;
     return 0; 

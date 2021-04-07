@@ -20,32 +20,34 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
-int main() { 
+const int Mxn = 2e5 + 5;
+int l[Mxn], r[Mxn];
+ll a[Mxn], p[Mxn];
+
+int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
+    int n, q;
+    cin >> n >> q;
+    priority_queue<int> mx;
+    fore(i,1,n) {
+        cin >> a[i];
+        mx.push(a[i]);
     }
+    fore(i,1,q) {
+        cin >> l[i] >> r[i];
+        p[l[i]]++, p[r[i]+1]--;
+    }
+    fore(i,1,n) p[i] += p[i-1];
+    priority_queue<pair<ll,int>> pos;
+    fore(i,1,n) pos.push({p[i], i});
+    while(!pos.empty()) {
+        int idx = pos.top().sd;
+        a[idx] = mx.top();
+        pos.pop(), mx.pop();
+    }
+    fore(i,1,n) a[i] += a[i-1];
     ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
-        }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
-    }
+    fore(i,1,q) ans += a[r[i]] - a[l[i]-1];
     cout << ans << endl;
     return 0; 
 }

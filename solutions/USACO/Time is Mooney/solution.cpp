@@ -20,32 +20,37 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const ll oo = 1ll << 50;
+const int Mxn = 1010;
+int n, m, c;
+int mi[Mxn];
+vi g[Mxn];
+ll dp[Mxn][Mxn];
+
+ll dfs(int u, int d) {
+    if(d == 0) return u == 0 ? 0 : -oo; 
+    if(dp[u][d] != -1) return dp[u][d];
+    ll ans = -oo;
+    for(auto & v : g[u]) {
+        ans = max(ans, dfs(v, d-1) + mi[u]);
+    }
+    return dp[u][d] = ans;
+}
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
+    freopen("time.in", "r", stdin);
+    freopen("time.out", "w", stdout);
+    cin >> n >> m >> c;
+    fori(i,0,n) cin >> mi[i];
+    fori(i,0,m) {
+        int u, v; cin >> u >> v;
+        u--, v--;
+        g[u].eb(v);
     }
+    memset(dp, -1, sizeof dp);
     ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
-        }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
-    }
+    fori(i,0,Mxn) ans = max(ans, dfs(0,i) - 1ll*c*i*i);
     cout << ans << endl;
     return 0; 
 }

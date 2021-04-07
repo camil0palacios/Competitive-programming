@@ -22,30 +22,18 @@ typedef vector<ll> vl;
 
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
+    int n;
+    cin >> n;
+    vii v;
     fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
+        int c; cin >> c;
+        fori(j,0,c) {
+            int x; cin >> x;
+            v.eb(x, i);
         }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
     }
-    cout << ans << endl;
+    sort(all(v));
+    for(auto & p : v) cout << char(p.sd + 'A');
+    cout << endl;
     return 0; 
 }

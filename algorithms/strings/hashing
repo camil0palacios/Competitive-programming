@@ -1,0 +1,4 @@
+this file is used to hashing choosing one prime and two mod primes to prevent collisions
+const int p = 65537;
+const int m1 = 39916801;
+const int m2 = 479001599;

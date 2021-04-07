@@ -20,20 +20,33 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
-int main() {
+// bars and stars problem
+
+int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
+    f[0] = 1;
     int t;
     cin >> t;
     while(t--) {
-        int n, m;
-        cin >> n >> m;
-        char c[n][m];
-        fori(i,0,n) fori(j,0,m) c[i][j] = 'B';
-        c[0][0] = 'W';
-        fori(i,0,n) {
-            fori(j,0,m) cout << c[i][j];
-            cout << endl;
+        ll n, k;
+        cin >> n >> k;
+        if(n-k < k-1) k = n-k+1;
+        if(k == 1) cout << 1 << endl;
+        else {
+            ll ans = 1;
+            fore(i,1,k-1)
+                ans = ans*(n - i) / (i);
+            cout << ans << endl;
         }
+        // vector<vl> dp(n+2, vl(n+2));
+        // fore(i,0,n) fore(j,0,k) dp[i][j] = 0;
+        // dp[0][0] = 1;
+        // fore(i,1,n) {
+            // dp[i][0] = dp[i][i] = 1;
+        //     fore(j,1,k) 
+        //         dp[i][j] = dp[i-1][j] + dp[i-1][j-1];
+        // } 
+        // cout << dp[n][k] << endl;
     }
-    return 0;
+    return 0; 
 }

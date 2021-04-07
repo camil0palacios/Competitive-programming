@@ -25,6 +25,7 @@
         "random": "cpp",
         "string_view": "cpp",
         "functional": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "utility": "cpp"
     }
 }

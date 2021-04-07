@@ -20,32 +20,32 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int Mxn = 1e5 + 5;
+ll a[Mxn], b[Mxn];
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
+    int n, m;
+    cin >> n >> m;
+    ll s1 = 0, s2 = 0, mx1 = 0, mx2 = 0, mn = 1e9;
     fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
+        cin >> a[i];
+        if(mx1 < a[i]) {
+            mx2 = mx1;
+            mx1 = a[i];
         }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
+        else if(mx2 < a[i]) mx2 = a[i];
+        s1 += a[i];
     }
+    fori(i,0,m) {
+        cin >> b[i];
+        s2 += b[i];
+        mn = min(mn, b[i]);
+    }
+    if(mx1 > mn) { cout << -1 << endl; return 0; }
+    ll ans = s1*m + s2;
+    ans -= mx1*m;
+    if(mx1 < mn) ans += mx1 - mx2;
     cout << ans << endl;
     return 0; 
 }

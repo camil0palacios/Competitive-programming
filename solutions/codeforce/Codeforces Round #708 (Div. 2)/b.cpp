@@ -20,32 +20,30 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int Mxn = 1e5 + 5;
+int a[Mxn];
+int cnt[Mxn];
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, m;
+        cin >> n >> m;
+        fore(i,0,m) cnt[i] = 0;
+        int ans = 0;
+        fori(i,0,n) cin >> a[i];
+        fori(i,0,n) a[i] %= m, cnt[a[i] % m]++;
+        fori(i,1,m) {
+            if(i < m-i && cnt[i]+cnt[m-i] > 0) {
+                if(cnt[i] == cnt[m-i]) ans++;
+                else ans += max(cnt[i], cnt[m-i]) - min(cnt[i], cnt[m-i]);
+            }
         }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
+        if(cnt[0]) ans++;
+        if(m%2 == 0 && cnt[m/2]) ans++;
+        cout << ans << endl;
     }
-    cout << ans << endl;
     return 0; 
 }

@@ -20,20 +20,34 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int mod = 1e9 + 7;
+const int Mxn = 2010;
+int n, k;
+ll dp[Mxn][Mxn][2];
+
+ll go(int i, int j, bool d) {
+    if(i == 0 || i == n+1 || j == 1) return 1;
+    if(dp[i][j][d] != -1) return dp[i][j][d];
+    ll ans = 0;
+    if(d) {
+        if(i <= n) ans = (ans + go(i+1, j, d)) % mod; 
+        if(i >= 1) ans = (ans + go(i-1, j-1, d^1)) % mod;
+    }
+    if(!d) {
+        if(i >= 1) ans = (ans + go(i-1, j, d)) % mod;
+        if(i <= n) ans = (ans + go(i+1, j-1, 1)) % mod;
+    }
+    return dp[i][j][d] = ans;
+}
+
 int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
     int t;
     cin >> t;
     while(t--) {
-        int n, m;
-        cin >> n >> m;
-        char c[n][m];
-        fori(i,0,n) fori(j,0,m) c[i][j] = 'B';
-        c[0][0] = 'W';
-        fori(i,0,n) {
-            fori(j,0,m) cout << c[i][j];
-            cout << endl;
-        }
+        cin >> n >> k;
+        memset(dp, -1, sizeof dp);
+        cout << go(1, k, 1) << endl;
     }
-    return 0;
+    return 0; 
 }

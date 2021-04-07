@@ -20,32 +20,30 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
+const int mod = 1e9 + 7;
+const int Mxn = 22;
+int n;
+bool a[Mxn][Mxn];
+ll dp[1 << Mxn];
+
+ll go(int msk) {
+    if(msk == (1 << n)-1) return 1;
+    if(dp[msk] != -1) return dp[msk];
+    ll ans = 0;
+    int i = __builtin_popcount(msk);
+    fori(j,0,n) {
+        if(!((msk >> j) & 1) && a[i][j]) {
+            ans = (ans + go(msk | (1 << j))) % mod;
+        } 
+    }
+    return dp[msk] = ans;
+}
+
 int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
-    int n; ll t;
-    cin >> n >> t;
-    list<int> l;
-    ll s = 0;
-    fori(i,0,n) {
-        int a; cin >> a;
-        l.eb(a);
-    }
-    ll ans = 0;
-    bool ok = 1;
-    while(t) {
-        ok = s = 0;
-        for(auto it = l.begin(); it != l.end();) {
-            if(s + *it <= t) {
-                s += *it;
-                it++;
-                ok = 1;
-            } else it = l.erase(it);
-        }
-        if(!ok) break; 
-        ll k = t/s;
-        ans += k*sz(l);
-        t %= s;
-    }
-    cout << ans << endl;
+    cin >> n;
+    fori(i,0,n) fori(j,0,n) cin >> a[i][j];
+    memset(dp, -1, sizeof dp);
+    cout << go(0) << endl;
     return 0; 
 }

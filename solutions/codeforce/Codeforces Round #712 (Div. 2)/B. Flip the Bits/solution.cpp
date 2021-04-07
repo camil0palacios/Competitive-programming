@@ -20,20 +20,30 @@ typedef vector<bool> vb;
 typedef vector<ii> vii;
 typedef vector<ll> vl;
 
-int main() {
+void solve() {
+    int n; 
+    string a, b;
+    cin >> n >> a >> b;
+    int o = 0, z = 0;
+    fori(i,0,n) a[i] == '1' ? o++ : z++;
+    bool ok = 1, t = 1;
+    forr(i,n-1,0) {
+        a[i] = t ? a[i] : char((a[i]-'0')^1 + '0');
+        if(a[i] == b[i]) {
+            a[i] == '1' ? o-- : z--;
+            continue;
+        }
+        if(o != z) { ok = 0; break; }
+        b[i] == '1' ? o-- : z--;
+        t ^= 1;
+    }
+    cout << (ok ? "YES" : "NO") << endl;
+}
+
+int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
     int t;
     cin >> t;
-    while(t--) {
-        int n, m;
-        cin >> n >> m;
-        char c[n][m];
-        fori(i,0,n) fori(j,0,m) c[i][j] = 'B';
-        c[0][0] = 'W';
-        fori(i,0,n) {
-            fori(j,0,m) cout << c[i][j];
-            cout << endl;
-        }
-    }
+    while(t--) solve();
     return 0;
 }
