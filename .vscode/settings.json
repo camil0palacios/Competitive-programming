@@ -26,6 +26,7 @@
         "string_view": "cpp",
         "functional": "cpp",
         "complex": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "type_traits": "cpp"
     }
 }
