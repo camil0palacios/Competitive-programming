@@ -14,6 +14,7 @@
 #define ar array
 using namespace std;
 
+// typedef __int128_t i128; // only for extreme cases
 typedef pair<int,int> ii;
 typedef vector<int> vi;
 typedef vector<bool> vb;

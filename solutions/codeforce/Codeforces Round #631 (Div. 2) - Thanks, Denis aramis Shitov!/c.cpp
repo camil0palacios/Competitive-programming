@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+#define ll long long
+#define fori(i,a,b) for(int i = a; i < b; i++)
+#define forr(i,a,b) for(int i = a; i >= b; i--)
+#define fore(i,a,b) for(int i = a; i <= b; i++)
+#define ft first
+#define sd second
+#define all(v) v.begin(), v.end()
+#define sz(v) (int) v.size()
+#define mp make_pair
+#define pb push_back
+#define eb emplace_back
+#define ar array
+using namespace std;
+
+// typedef __int128_t i128; // only for extreme cases
+typedef pair<int,int> ii;
+typedef vector<int> vi;
+typedef vector<bool> vb;
+typedef vector<ii> vii;
+typedef vector<ll> vl;
+
+const int N = 2e5 + 5;
+int l[N], ans[N];
+
+int main() { 
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+    int n, m;
+    cin >> n >> m;
+    ll s = 0;
+    fori(i,0,m) cin >> l[i], s += l[i];
+    bool ok = 1;
+    int j = 0, r = -1;
+    fori(i,0,m) {
+        while(j <= r && j + s < n) j++;
+        if(j + s >= n && j + l[i] <= n) {
+            ans[i] = j;
+            r = max(r, j + l[i] - 1);
+            j++;
+        } else { 
+            ok = 0; break; 
+        }
+        s -= l[i];
+    }
+    if(ok) {
+        fori(i,0,m) cout << ans[i]+1 << ' ';
+        cout << endl;
+    }
+    else cout << -1 << endl;
+    return 0; 
+}

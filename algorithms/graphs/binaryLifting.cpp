@@ -6,7 +6,7 @@ void dfs(int u, int p) {
         if(v == p) continue;
         lvl[v] = lvl[u] + 1;
         st[v][0] = u;
-        fori(i,0,Lg) st[v][i] = st[st[v][i-1]][i-1];
+        fori(i,1,Lg) st[v][i] = st[st[v][i-1]][i-1];
         dfs(v, u);
     }
 }

@@ -3,3 +3,6 @@
 *.in
 *.out
 *.txt
+in
+out
+*.zip

@@ -1,29 +1,47 @@
 #include <bits/stdc++.h>
 #define endl '\n'
+#define ll long long
+#define fori(i,a,b) for(int i = a; i < b; i++)
+#define forr(i,a,b) for(int i = a; i >= b; i--)
+#define fore(i,a,b) for(int i = a; i <= b; i++)
+#define ft first
+#define sd second
+#define all(v) v.begin(), v.end()
+#define sz(v) (int) v.size()
+#define mp make_pair
+#define pb push_back
+#define eb emplace_back
+#define ar array
 using namespace std;
 
-const int MXN = 1e6 + 5;
-int cnt[MXN];
+// typedef __int128_t i128; only for extreme cases
+typedef pair<int,int> ii;
+typedef vector<int> vi;
+typedef vector<bool> vb;
+typedef vector<ii> vii;
+typedef vector<ll> vl;
 
-int main() {
+const int Mxn = 1e6;
+int a[Mxn+1];
+
+int main() { 
     ios_base::sync_with_stdio(false); cin.tie(NULL);
     int n;
     cin >> n;
-    for(int i = 0; i < n; i++) {
+    fori(i,0,n) {
         int x; cin >> x;
-        for(int j = 1; j * j <= x; j++) {
-            if(x % j == 0) {
-                cnt[j]++;
-                if(x / j != j) cnt[x / j]++;
-            }
-        } 
+        a[x]++;
     }
-    int lst = 1;
-    for(int i = 1; i < MXN; i++) {
-        if(cnt[i] >= 2) {
-            lst = i;
+    forr(i,Mxn,1) {
+        int cnt = 0;
+        for(int j = i; j <= Mxn; j += i) {
+            cnt += a[j];
+        }
+        if(cnt >= 2) {
+            cout << i << endl;
+            return 0;
         }
     }
-    cout << lst << endl;
-    return 0;
+    cout << 1 << endl;
+    return 0; 
 }

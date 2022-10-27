@@ -9,7 +9,7 @@ struct Rmq {
         lg.resize(n);
         int p = 1, mxlg = 0;
         while(p < n) p *= 2, mxlg++;
-        st.assign(n, vector<T>(2));
+        st.assign(n, vector<T>(mxlg));
         lg[1] = 0;
         for(int i = 2; i < n; i++) lg[i] = lg[i/2] + 1;
         for(int i = 0; i < n; i++) st[i][0] = a[i];
